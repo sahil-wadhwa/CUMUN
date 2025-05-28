@@ -1,23 +1,26 @@
 import React from "react";
 import "./hero.css";
+
 const Hero = () => {
   return (
     <section id="home" className="relative w-screen h-screen bg-red-900 overflow-hidden">
+      {/* Overlay Gradient */}
       <div className="absolute inset-0 bg-gradient-to-r to-red-900/90 from-red-600/40 z-10"></div>
 
+      {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-top z-0"
         style={{
-          backgroundImage: "url('https://i.ibb.co/gMqc21t4/191230189-3739112682862090-9220374159950932563-n.jpg')",
+          backgroundImage:
+            "url('https://i.ibb.co/gMqc21t4/191230189-3739112682862090-9220374159950932563-n.jpg')",
         }}
       ></div>
 
+      {/* Content */}
       <div className="container mx-auto px-4 h-full flex items-center relative z-20">
         <div className="max-w-3xl">
           <div className="inline-block mb-4 px-3 py-1 bg-red-600 rounded-full">
-            <span className="text-white text-sm font-medium">
-              September 8-10, 2025
-            </span>
+            <span className="text-white text-sm font-medium">September 8-10, 2025</span>
           </div>
 
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
@@ -31,18 +34,18 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col text-white sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <div
+            <a
               href="#registration"
               className="px-8 py-3 bg-red-600 hover:bg-red-700 text-yellow font-medium rounded-md duration-300 text-center"
             >
               Register Now
-            </div>
-            <div
+            </a>
+            <a
               href="#about"
               className="px-8 py-3 bg-transparent hover:bg-white/10 text-white font-medium rounded-md border border-white transition-colors duration-300 text-center"
             >
               Learn More
-            </div>
+            </a>
           </div>
         </div>
       </div>
