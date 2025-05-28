@@ -1,3 +1,6 @@
+@import "tailwindcss";
+
+
 .hero-section {
   position: relative;
   width: 100vw;

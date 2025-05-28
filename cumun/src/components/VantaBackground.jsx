@@ -82,12 +82,12 @@ const VantaBackground = (props) => {
 
           <div className="order-1 md:order-2">
             <div className="relative max-w-full w-full md:w-auto">
-              <img
-                src="src/public/iste2.jpg"
-                alt="Students in discussion"
-                className="rounded-lg shadow-lg w-full max-h-[400px] object-contain"
-                style={{ imageRendering: "auto" }}
-              />
+             <img
+  src="../assets/bh.jpeg"
+  alt="Students in discussion"
+  className="rounded-lg shadow-lg w-full max-h-[400px] object-contain"
+  style={{ imageRendering: "auto" }}
+/>
               <div className="absolute -bottom-6 -left-6 bg-red-600 text-white font-extrabold p-4 rounded-lg shadow-lg">
                 <p className="text-xl font-bold">New Beginnings</p>
                 <p className="text-sm">Committed to Excellence</p>

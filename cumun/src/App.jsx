@@ -10,7 +10,6 @@ const App = () => {
       <div className="font-sans bg-gray-50">
         <Hero/>
         <VantaBackground/>
-        <Schedule/>
         <ImageStack/>
         <Registration/>
         <Schedule/>
