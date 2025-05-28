@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import './Registration.css';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 const Registration = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    university: '',
-    phoneNumber: '',
-    delegateType: '',
-    committeePreference1: '',
-    committeePreference2: '',
-    previousExperience: '',
+    fullName: "",
+    email: "",
+    university: "",
+    phoneNumber: "",
+    delegateType: "",
+    committeePreference1: "",
+    committeePreference2: "",
+    previousExperience: "",
     accommodationRequired: false,
     agreeToTerms: false,
   });
@@ -23,7 +22,7 @@ const Registration = () => {
     const { name, type, value, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
 
     if (errors[name]) {
@@ -33,13 +32,18 @@ const Registration = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.fullName) newErrors.fullName = 'Full Name is required';
-    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Valid Email is required';
-    if (!formData.university) newErrors.university = 'University is required';
-    if (!formData.phoneNumber) newErrors.phoneNumber = 'Phone Number is required';
-    if (!formData.delegateType) newErrors.delegateType = 'Delegate Type is required';
-    if (!formData.committeePreference1) newErrors.committeePreference1 = 'First committee preference is required';
-    if (!formData.agreeToTerms) newErrors.agreeToTerms = 'You must agree to the terms and conditions';
+    if (!formData.fullName) newErrors.fullName = "Full Name is required";
+    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email))
+      newErrors.email = "Valid Email is required";
+    if (!formData.university) newErrors.university = "University is required";
+    if (!formData.phoneNumber)
+      newErrors.phoneNumber = "Phone Number is required";
+    if (!formData.delegateType)
+      newErrors.delegateType = "Delegate Type is required";
+    if (!formData.committeePreference1)
+      newErrors.committeePreference1 = "First committee preference is required";
+    if (!formData.agreeToTerms)
+      newErrors.agreeToTerms = "You must agree to the terms and conditions";
     return newErrors;
   };
 
@@ -54,72 +58,137 @@ const Registration = () => {
   };
 
   const formField = (label, name, type = "text", isRequired = false) => (
-    <div className="form-group">
-      <label htmlFor={name}>{label}{isRequired && '*'}</label>
+    <div className="mb-4">
+      <label
+        htmlFor={name}
+        className="block text-sm font-semibold text-gray-700"
+      >
+        {label}
+        {isRequired && <span className="text-crimson ml-1">*</span>}
+      </label>
       <input
         id={name}
         name={name}
         type={type}
         value={formData[name]}
         onChange={handleChange}
-        aria-required={isRequired}
-        aria-invalid={!!errors[name]}
+        className="mt-1 block w-full rounded-md border border-gray-300 bg-white text-gray-900 shadow-sm focus:border-crimson focus:ring-crimson sm:text-sm py-2 px-3 transition-colors"
+        required={isRequired}
       />
-      {errors[name] && <div className="error-text">{errors[name]}</div>}
+      {errors[name] && (
+        <p className="text-xs text-crimson mt-1">{errors[name]}</p>
+      )}
     </div>
   );
 
   if (isSubmitted) {
     return (
-      <motion.div className="registration-success" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        <div className="icon-container">
-          <span className="check-icon">✔️</span>
-        </div>
-        <h2>Thank you for Registering!</h2>
-        <p>We have received your submission. Check your email for confirmation.</p>
-        <button className="btn" onClick={() => setIsSubmitted(false)}>Register Another</button>
+      <motion.div
+        className="max-w-md mx-auto mt-10 p-6 text-center bg-crimson-light rounded-lg shadow"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        <div className="text-5xl mb-4 text-crimson">✔️</div>
+        <h2 className="text-2xl font-semibold text-crimson-dark">
+          Thank you for Registering!
+        </h2>
+        <p className="text-crimson-dark mt-2">
+          We have received your submission. Check your email for confirmation.
+        </p>
+        <button
+          className="mt-6 px-6 py-2 bg-crimson hover:bg-crimson-dark text-white rounded-md transition-colors"
+          onClick={() => setIsSubmitted(false)}
+        >
+          Register Another
+        </button>
       </motion.div>
     );
   }
 
   return (
     <motion.div
-      className="registration-form-container"
+      className="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-xl shadow-md"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <h2>CU-MUN 2025 Delegate Registration</h2>
-      <form onSubmit={handleSubmit} className="form-grid">
+      <h2 className="text-3xl font-bold text-red-600 mb-6">
+        CU-MUN 2025 Delegate Registration
+      </h2>
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+      >
         {formField("Full Name", "fullName", "text", true)}
         {formField("Email Address", "email", "email", true)}
         {formField("University / Institution", "university", "text", true)}
         {formField("Phone Number", "phoneNumber", "tel", true)}
 
-        <div className="form-group">
-          <label htmlFor="delegateType">Delegate Type*</label>
-          <select name="delegateType" id="delegateType" value={formData.delegateType} onChange={handleChange}>
+        {/* Delegate Type */}
+        <div>
+          <label
+            htmlFor="delegateType"
+            className="block text-sm font-semibold text-gray-700"
+          >
+            Delegate Type<span className="text-crimson ml-1">*</span>
+          </label>
+          <select
+            name="delegateType"
+            id="delegateType"
+            value={formData.delegateType}
+            onChange={handleChange}
+            className="mt-1 block w-full rounded-md border border-gray-300 bg-white text-gray-900 shadow-sm focus:ring-crimson focus:border-crimson sm:text-sm py-2 px-3 transition-colors"
+          >
             <option value="">Select</option>
             <option value="Individual">Individual</option>
             <option value="Group">Group</option>
           </select>
-          {errors.delegateType && <div className="error-text">{errors.delegateType}</div>}
+          {errors.delegateType && (
+            <p className="text-xs text-crimson mt-1">{errors.delegateType}</p>
+          )}
         </div>
 
-        <div className="form-group">
-          <label htmlFor="committeePreference1">Committee Preference 1*</label>
-          <select name="committeePreference1" id="committeePreference1" value={formData.committeePreference1} onChange={handleChange}>
+        {/* Committee Preferences */}
+        <div>
+          <label
+            htmlFor="committeePreference1"
+            className="block text-sm font-semibold text-gray-700"
+          >
+            Committee Preference 1<span className="text-crimson ml-1">*</span>
+          </label>
+          <select
+            name="committeePreference1"
+            id="committeePreference1"
+            value={formData.committeePreference1}
+            onChange={handleChange}
+            className="mt-1 block w-full rounded-md border border-gray-300 bg-white text-gray-900 shadow-sm focus:ring-crimson focus:border-crimson sm:text-sm py-2 px-3 transition-colors"
+          >
             <option value="">Select</option>
             <option value="UNGA">UNGA</option>
             <option value="UNSC">UNSC</option>
             <option value="WHO">WHO</option>
           </select>
-          {errors.committeePreference1 && <div className="error-text">{errors.committeePreference1}</div>}
+          {errors.committeePreference1 && (
+            <p className="text-xs text-crimson mt-1">
+              {errors.committeePreference1}
+            </p>
+          )}
         </div>
 
-        <div className="form-group">
-          <label htmlFor="committeePreference2">Committee Preference 2</label>
-          <select name="committeePreference2" id="committeePreference2" value={formData.committeePreference2} onChange={handleChange}>
+        <div>
+          <label
+            htmlFor="committeePreference2"
+            className="block text-sm font-semibold text-gray-700"
+          >
+            Committee Preference 2
+          </label>
+          <select
+            name="committeePreference2"
+            id="committeePreference2"
+            value={formData.committeePreference2}
+            onChange={handleChange}
+            className="mt-1 block w-full rounded-md border border-gray-300 bg-white text-gray-900 shadow-sm focus:ring-crimson focus:border-crimson sm:text-sm py-2 px-3 transition-colors"
+          >
             <option value="">Select</option>
             <option value="UNGA">UNGA</option>
             <option value="UNSC">UNSC</option>
@@ -127,23 +196,70 @@ const Registration = () => {
           </select>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="previousExperience">Previous Experience</label>
-          <textarea name="previousExperience" id="previousExperience" value={formData.previousExperience} onChange={handleChange} />
+        {/* Previous Experience */}
+        <div className="md:col-span-2">
+          <label
+            htmlFor="previousExperience"
+            className="block text-sm font-semibold text-gray-700"
+          >
+            Previous Experience
+          </label>
+          <textarea
+            name="previousExperience"
+            id="previousExperience"
+            rows="3"
+            value={formData.previousExperience}
+            onChange={handleChange}
+            className="mt-1 block w-full rounded-md border border-gray-300 bg-white text-gray-900 shadow-sm focus:ring-crimson focus:border-crimson sm:text-sm py-2 px-3 transition-colors"
+          />
         </div>
 
-        <div className="form-group checkbox">
-          <input type="checkbox" name="accommodationRequired" id="accommodationRequired" checked={formData.accommodationRequired} onChange={handleChange} />
-          <label htmlFor="accommodationRequired">Accommodation Required</label>
+        {/* Accommodation */}
+        <div className="flex items-center space-x-2 md:col-span-2">
+          <input
+            type="checkbox"
+            id="accommodationRequired"
+            name="accommodationRequired"
+            checked={formData.accommodationRequired}
+            onChange={handleChange}
+            className="h-4 w-4 text-crimson focus:ring-crimson border-gray-300 rounded transition-colors"
+          />
+          <label
+            htmlFor="accommodationRequired"
+            className="text-sm text-gray-700"
+          >
+            Accommodation Required
+          </label>
         </div>
 
-        <div className="form-group checkbox">
-          <input type="checkbox" name="agreeToTerms" id="agreeToTerms" checked={formData.agreeToTerms} onChange={handleChange} />
-          <label htmlFor="agreeToTerms">I agree to the terms and conditions*</label>
-          {errors.agreeToTerms && <div className="error-text">{errors.agreeToTerms}</div>}
+        {/* Terms */}
+        <div className="flex items-center space-x-2 md:col-span-2">
+          <input
+            type="checkbox"
+            id="agreeToTerms"
+            name="agreeToTerms"
+            checked={formData.agreeToTerms}
+            onChange={handleChange}
+            className="h-4 w-4 text-crimson focus:ring-crimson border-gray-300 rounded transition-colors"
+          />
+          <label htmlFor="agreeToTerms" className="text-sm text-gray-700">
+            I agree to the terms and conditions
+            <span className="text-crimson ml-1">*</span>
+          </label>
+          {errors.agreeToTerms && (
+            <p className="text-xs text-crimson mt-1">{errors.agreeToTerms}</p>
+          )}
         </div>
 
-        <button type="submit" className="btn">Submit Registration</button>
+        {/* Submit */}
+        <div className="md:col-span-2">
+          <button
+            type="submit"
+            className="mt-6 w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition-colors"
+          >
+            Submit Registration
+          </button>
+        </div>
       </form>
     </motion.div>
   );
